@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Student Dashboard - {{ user.username }}</h1>
+<div class="row">
+    {% for course in courses %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>{{ course.course_name }}</h5>
+                <p>Teacher: {{ course.teacher|default:"Not Assigned" }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No courses enrolled yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

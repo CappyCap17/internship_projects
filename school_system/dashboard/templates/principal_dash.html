@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Principal Dashboard</h1>
+<a href="{% url 'create-course' %}" class="btn btn-success mb-3">Create New Course</a>
+
+<div class="row">
+    {% for course in courses %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.course_name }}</h5>
+                <p class="card-text">
+                    ID: {{ course.course_id }}<br>
+                    Teacher: {{ course.teacher|default:"Not Assigned" }}
+                </p>
+                <a href="{% url 'edit-course' course.id %}" class="btn btn-primary">Edit</a>
+            </div>
+            <div class="card-footer">
+                Students: {{ course.students.count }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
