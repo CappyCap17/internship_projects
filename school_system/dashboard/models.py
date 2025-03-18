@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
 
 class Course(models.Model):
     course_id = models.CharField(max_length=20, unique=True)  # Unique identifier
-    course_name = models.CharField(max_length=100)  # Human-readable name
+    course_name = models.CharField(max_length=100)  
     
     teacher = models.ForeignKey(
         CustomUser, 
@@ -35,7 +35,7 @@ class Course(models.Model):
         on_delete=models.CASCADE,
         related_name='managed_courses',
         limit_choices_to={'role': 'P'}
-    )  # Added closing parenthesis
+    )  
 
     def __str__(self):
         return self.course_name
