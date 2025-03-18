@@ -3,23 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Page</title>
+    <title>Enroll in Course</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
-        <h1>Register</h1>
+        <h1>Enroll in Course</h1>
         <nav>
             <a href="{% url 'logout' %}">Logout</a>
             <a href="#" onclick="history.back()">Back</a>
         </nav>
     </header>
     <main>
+        <p>Are you sure you want to enroll in {{ course.course_name }}?</p>
+
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
+            <button type="submit">Enroll</button>
         </form>
+
+        <a href="{% url 'student-dash' %}">Cancel</a>
     </main>
 </body>
 </html>

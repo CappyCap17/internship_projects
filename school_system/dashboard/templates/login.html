@@ -1,16 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username">
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password">
-    </div>
-    <button type="submit">Login</button>
-</form>
-{% endblock %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+        <nav>
+            <a href="#" onclick="history.back()">Back</a>
+        </nav>
+    </header>
+    <main>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </main>
+</body>
+</html>

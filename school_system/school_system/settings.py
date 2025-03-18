@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "dashboard.apps.DashboardConfig",
+    "rest_framework.authtoken",
 ]
 
 AUTH_USER_MODEL = 'dashboard.CustomUser'
@@ -82,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',  # PostgreSQL adapter
         'NAME': 'school_db',     # Database name
         'USER': 'postgres',      # DB admin user
-        'PASSWORD': 'pass@1234',  # DB admin password
+        'PASSWORD': 'pass@123',  # DB admin password
         'HOST': 'localhost',     # Where DB is hosted
         'PORT': '5432',          # Default PostgreSQL port
     }
@@ -103,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
+
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
@@ -132,3 +134,27 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = '/login/'  # Add this line
 LOGIN_REDIRECT_URL = '/dashboard/'  # Add this line
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
+
+SESSION_COOKIE_HTTPONLY = False
+
+SESSION_COOKIE_SECURE = True 
+
+SESSION_COOKIE_NAME = 'schoolsystem_sessionid' 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# For development, use the following to serve static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'dashboard/static',
+]

@@ -14,20 +14,20 @@ class CustomUser(AbstractUser):
         return f"{self.get_role_display()}: {self.username}"
 
 class Course(models.Model):
-    course_id = models.CharField(max_length=20, unique=True)  # Unique identifier
-    course_name = models.CharField(max_length=100)  
+    course_id = models.CharField(max_length=20, unique=True)
+    course_name = models.CharField(max_length=100)
     
     teacher = models.ForeignKey(
         CustomUser, 
-        on_delete=models.SET_NULL,  # Keep course if teacher deleted
+        on_delete=models.SET_NULL, 
         null=True,
-        limit_choices_to={'role': 'T'}  # Only teachers can be assigned
+        limit_choices_to={'role': 'T'}
     )
     
     students = models.ManyToManyField(
         CustomUser, 
-        related_name='enrolled_courses',  # Reverse relationship name
-        limit_choices_to={'role': 'S'}  # Only students allowed
+        related_name='enrolled_courses', 
+        limit_choices_to={'role': 'S'}
     )
     
     principal = models.ForeignKey(
@@ -35,7 +35,7 @@ class Course(models.Model):
         on_delete=models.CASCADE,
         related_name='managed_courses',
         limit_choices_to={'role': 'P'}
-    )  
+    )
 
     def __str__(self):
         return self.course_name

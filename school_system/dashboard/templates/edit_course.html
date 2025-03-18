@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Page</title>
+    <title>Edit Course</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
-        <h1>Register</h1>
+        <h1>Edit Course</h1>
         <nav>
             <a href="{% url 'logout' %}">Logout</a>
             <a href="#" onclick="history.back()">Back</a>
@@ -18,7 +18,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Register</button>
+            <button type="submit">Save Changes</button>
         </form>
     </main>
 </body>

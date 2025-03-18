@@ -1,18 +1,40 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Student Dashboard - {{ user.username }}</h1>
-<div class="row">
-    {% for course in courses %}
-    <div class="col-md-4 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5>{{ course.course_name }}</h5>
-                <p>Teacher: {{ course.teacher|default:"Not Assigned" }}</p>
-            </div>
-        </div>
-    </div>
-    {% empty %}
-    <p>No courses enrolled yet.</p>
-    {% endfor %}
-</div>
-{% endblock %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Student Dashboard</h1>
+        <nav>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="#" onclick="history.back()">Back</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Enrolled Courses</h2>
+        <ul>
+            {% for course in courses %}
+                <li>{{ course.course_name }}</li>
+            {% empty %}
+                <li>No courses enrolled.</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Available Courses</h2>
+        <ul>
+            {% for course in all_courses %}
+                <li>
+                    {{ course.course_name }} 
+                    <a href="{% url 'enroll-course' course.id %}">Enroll</a>
+                </li>
+            {% empty %}
+                <li>No available courses.</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

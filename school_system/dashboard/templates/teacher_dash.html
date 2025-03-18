@@ -1,21 +1,28 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Teacher Dashboard - {{ user.username }}</h1>
-{% for course in courses %}
-<div class="card mb-3">
-    <div class="card-body">
-        <h5>{{ course.course_name }}</h5>
-        <h6>Students:</h6>
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Teacher Dashboard</h1>
+        <nav>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="#" onclick="history.back()">Back</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Courses</h2>
         <ul>
-            {% for student in course.students.all %}
-            <li>{{ student.username }}</li>
+            {% for course in courses %}
+                <li>{{ course.course_name }}</li>
             {% empty %}
-            <li>No students enrolled</li>
+                <li>No courses assigned.</li>
             {% endfor %}
         </ul>
-    </div>
-</div>
-{% empty %}
-<p>No courses assigned yet.</p>
-{% endfor %}
-{% endblock %}
+    </main>
+</body>
+</html>
