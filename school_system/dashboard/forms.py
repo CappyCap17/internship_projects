@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Course
+from .models import CustomUser, Course, Assignment, Submission
+
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -21,3 +22,14 @@ class CourseForm(forms.ModelForm):
         widgets = {
             'students': forms.CheckboxSelectMultiple
         }
+
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Assignment
+        fields = ['title', 'description']
+
+class SubmissionForm(forms.ModelForm):
+    class Meta:
+        model = Submission
+        fields = ['answer']

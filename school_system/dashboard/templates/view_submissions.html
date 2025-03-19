@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Submissions</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Submissions for {{ assignment.title }}</h1>
+        <nav>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="#" onclick="history.back()">Back</a>
+        </nav>
+    </header>
+    <main>
+        <ul>
+            {% for submission in submissions %}
+                <li>
+                    {{ submission.student.username }}: {{ submission.answer }}
+                </li>
+            {% empty %}
+                <li>No submissions yet.</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>

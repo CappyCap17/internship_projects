@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser 
+from .models import CustomUser, Assignment, Submission
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +19,15 @@ class UserSerializer(serializers.ModelSerializer):
             unique_id=validated_data['unique_id']
         )
         return user
+
+
+
+class AssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Assignment
+        fields = ['id', 'title', 'description', 'course', 'teacher']
+
+class SubmissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Submission
+        fields = ['id', 'assignment', 'student', 'answer']

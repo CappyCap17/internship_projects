@@ -18,9 +18,26 @@
         <h2>Your Courses</h2>
         <ul>
             {% for course in courses %}
-                <li>{{ course.course_name }}</li>
+                <li>
+                    {{ course.course_name }}
+                    <a href="{% url 'set-assignment' course.id %}">Set Assignment</a>
+                    <a href="{% url 'view-submissions' course.id %}">View Submissions</a>
+                </li>
             {% empty %}
                 <li>No courses assigned.</li>
+            {% endfor %}
+        </ul>
+        
+        
+        <h2>View Submissions</h2>
+        <ul>
+            {% for assignment in assignments %}
+                <li>
+                    {{ assignment.title }} 
+                    <a href="{% url 'view-submissions' assignment.id %}">View Submissions</a>
+                </li>
+            {% empty %}
+                <li>No assignments available.</li>
             {% endfor %}
         </ul>
     </main>

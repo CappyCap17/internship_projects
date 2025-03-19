@@ -3,32 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Dashboard</title>
+    <title>View Assignments</title>
     <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
 </head>
 <body>
     <header>
-        <h1>Student Dashboard</h1>
+        <h1>Assignments</h1>
         <nav>
             <a href="{% url 'logout' %}">Logout</a>
             <a href="#" onclick="history.back()">Back</a>
         </nav>
     </header>
     <main>
-        <h2>Enrolled Courses</h2>
-        <ul>
-            {% for course in courses %}
-                <li>{{ course.course_name }}</li>
-            {% empty %}
-                <li>No courses enrolled.</li>
-            {% endfor %}
-        </ul>
-
-        <h2>Assignments</h2>
         <ul>
             {% for assignment in assignments %}
                 <li>
-                    {{ assignment.title }} 
+                    {{ assignment.title }} ({{ assignment.course.course_name }})
                     <a href="{% url 'submit-assignment' assignment.id %}">Submit</a>
                 </li>
             {% empty %}

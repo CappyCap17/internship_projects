@@ -39,3 +39,22 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_name
+
+class Assignment(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Submission(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    answer = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.username}'s Submission for {self.assignment.title}"
